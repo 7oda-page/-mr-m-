@@ -265,15 +265,6 @@
             margin-bottom: 20px;
         }
 
-        .media-card video {
-            width: 100%;
-            max-height: 380px;
-            border-radius: 12px;
-            display: block;
-            object-fit: contain;
-            background: #000;
-        }
-
         audio {
             width: 100%;
             height: 45px;
@@ -321,7 +312,6 @@
             <div class="slider-wrapper">
                 <div class="swipe-hint"> Swipe right </div>
                 <div class="slider-container">
-                    <!-- تم إزالة loading="lazy" لفتح الصور مباشرة -->
                     <div class="card"><img src="F1.JPG" alt="صورة 1"></div>
                     <div class="card"><img src="F5.jpg" alt="صورة 2"></div>
                     <div class="card"><img src="F6.JPG" alt="صورة 3"></div>
@@ -331,13 +321,16 @@
             </div>
 
             <div class="section-title">Special Video</div>
-            <div class="media-card">
-                <!-- تم ضبط التمييز التلقائي للتسريع -->
-                <video id="myVideo" controls playsinline webkit-playsinline preload="auto">
-                    <source src="V1.mp4" type="video/mp4">
-                    <source src="V1.MP4" type="video/mp4">
-                    متصفحك لا يدعم تشغيل الفيديو.
-                </video>
+            <div class="media-card" style="padding: 0; overflow: hidden; border-radius: 18px;">
+                <iframe
+                    src="https://player.cloudinary.com/embed/?cloud_name=xi95abdc&public_id=V1"
+                    width="100%"
+                    height="380"
+                    style="height: 380px; width: 100%; border: 0; border-radius: 18px; display: block;"
+                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                    allowfullscreen
+                    frameborder="0">
+                </iframe>
             </div>
 
             <div class="section-title">Something I only feel with you 💕</div>
@@ -362,7 +355,7 @@
     </div>
 
     <script>
-        // التحميل المسبق المباشر للصور أثناء كتابة كلمة السر
+        // التحميل المسبق المباشر للصور
         const imageUrls = ["F1.JPG", "F5.jpg", "F6.JPG", "F2.JPG", "F4.JPG"];
         imageUrls.forEach(url => {
             const img = new Image();
@@ -443,10 +436,6 @@
                 document.getElementById("password-page").style.display = "none";
                 document.getElementById("content-page").style.display = "block";
 
-                // تجهيز الفيديو في خلفية النظام للتشغيل السريع
-                const video = document.getElementById("myVideo");
-                if(video) { video.load(); }
-                
                 window.scrollTo({ top: 0, behavior: 'instant' });
                 document.documentElement.scrollTop = 0;
                 document.body.scrollTop = 0;
