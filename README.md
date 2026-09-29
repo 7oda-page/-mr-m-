@@ -18,7 +18,7 @@
             border: none;
             outline: none;
             -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation; /* منع الزوم المزعج عند اللمس السريع */
+            touch-action: manipulation;
         }
 
         html, body {
@@ -59,7 +59,7 @@
             pointer-events: none;
             user-select: none;
             -webkit-user-select: none;
-            will-change: transform, opacity; /* تحسين استهلاك المعالج ورامات الموبايل */
+            will-change: transform, opacity;
         }
 
         .heart svg {
@@ -245,7 +245,7 @@
             scroll-snap-type: x mandatory;
             gap: 12px;
             padding: 10px 5px;
-            -webkit-overflow-scrolling: touch; /* سحب أملس جداً على الآيفون */
+            -webkit-overflow-scrolling: touch;
             direction: rtl;
         }
 
@@ -263,12 +263,14 @@
             box-sizing: border-box;
         }
 
+        /* تعديل ظهور الصورة كاملة وبجودتها بدون قص */
         .card img {
             width: 100%;
-            height: 380px;
-            object-fit: cover;
+            max-height: 450px;
+            object-fit: contain;
             border-radius: 12px;
             display: block;
+            background: rgba(0, 0, 0, 0.15);
         }
 
         .media-card {
@@ -283,10 +285,10 @@
 
         .media-card video {
             width: 100%;
-            max-height: 320px;
+            max-height: 350px;
             border-radius: 12px;
             display: block;
-            object-fit: cover;
+            object-fit: contain;
             background: #000;
         }
 
@@ -310,7 +312,7 @@
             <div class="sub-title">Your other world 🌏❤️</div>
             
             <div class="otp-container">
-                <input type="tel" maxlength="1" class="otp-input" pattern="[0-9]*" inputmode="numeric" autocomplete="one-time-code">
+                <input type="tel" maxlength="1" class="otp-input" pattern="[0-9]*" inputmode="numeric">
                 <input type="tel" maxlength="1" class="otp-input" pattern="[0-9]*" inputmode="numeric">
                 <input type="tel" maxlength="1" class="otp-input" pattern="[0-9]*" inputmode="numeric">
                 <input type="tel" maxlength="1" class="otp-input" pattern="[0-9]*" inputmode="numeric">
@@ -337,25 +339,26 @@
             <div class="slider-wrapper">
                 <div class="swipe-hint"> Swipe right </div>
                 <div class="slider-container">
-                    <div class="card"><img src="F1.JPG" alt="صورة 1"></div>
-                    <div class="card"><img src="F5.jpg" alt="صورة 2"></div>
-                    <div class="card"><img src="F6.JPG" alt="صورة 3"></div>
-                    <div class="card"><img src="F2.JPG" alt="صورة 4"></div>
-                    <div class="card"><img src="F4.JPG" alt="صورة 5"></div>
+                    <div class="card"><img src="F1.JPG" alt="صورة 1" loading="eager"></div>
+                    <div class="card"><img src="F5.jpg" alt="صورة 2" loading="eager"></div>
+                    <div class="card"><img src="F6.JPG" alt="صورة 3" loading="eager"></div>
+                    <div class="card"><img src="F2.JPG" alt="صورة 4" loading="eager"></div>
+                    <div class="card"><img src="F4.JPG" alt="صورة 5" loading="eager"></div>
                 </div>
             </div>
 
             <div class="section-title">Special Video</div>
             <div class="media-card">
-                <video id="myVideo" controls playsinline webkit-playsinline preload="auto">
+                <video id="myVideo" controls playsinline webkit-playsinline preload="metadata">
                     <source src="V1.MP4" type="video/mp4">
+                    <source src="V1.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
             </div>
 
             <div class="section-title">Something I only feel with you 💕</div>
             <div class="media-card">
-                <audio id="myAudio" controls preload="auto">
+                <audio id="myAudio" controls preload="metadata">
                     <source src="S1.mp3" type="audio/mpeg">
                     متصفحك لا يدعم تشغيل الصوت.
                 </audio>
@@ -376,7 +379,7 @@
     <script>
         // 1. القلوب المتحركة
         const heartsContainer = document.getElementById('hearts-container');
-        const heartCount = 18; // تقليل العدد قليلاً لأفضل أداء على الآيفون
+        const heartCount = 18;
 
         for (let i = 0; i < heartCount; i++) {
             const heart = document.createElement('div');
@@ -403,7 +406,7 @@
             heartsContainer.appendChild(heart);
         }
 
-        // 2. التحكم في إدخال كلمة السر والـ OTP بخبرة استخدام سلسة
+        // 2. التحكم في إدخال كلمة السر بدون التحول التلقائي للصفحة إلا بدوسة Enter
         const correctPassword = "23112024"; 
         const inputs = document.querySelectorAll('.otp-input');
 
@@ -415,12 +418,6 @@
                         inputs[index + 1].focus();
                     }
                 }
-                // التحقق التلقائي بمجرد ملء آخر خانة
-                let currentVal = "";
-                inputs.forEach(inp => currentVal += inp.value);
-                if(currentVal.length === inputs.length) {
-                    checkPassword();
-                }
             });
 
             input.addEventListener('keydown', (e) => {
@@ -429,6 +426,8 @@
                         inputs[index - 1].focus();
                         inputs[index - 1].value = "";
                     }
+                } else if (e.key === "Enter") {
+                    checkPassword();
                 }
             });
 
@@ -440,7 +439,6 @@
                         if (inputs[i]) inputs[i].value = char;
                     });
                     inputs[inputs.length - 1].focus();
-                    checkPassword();
                 }
             });
         });
@@ -461,9 +459,15 @@
 
                 const video = document.getElementById('myVideo');
                 const audio = document.getElementById('myAudio');
-                if(video) video.load();
-                if(audio) audio.load();
-            } else if (userEntered.length === inputs.length) {
+                
+                // تجهيز الميديا للعمل على سفاري بعد الضغط على Enter مباشرةً
+                if(video) {
+                    video.load();
+                }
+                if(audio) {
+                    audio.load();
+                }
+            } else {
                 errorText.style.display = "block";
                 inputs.forEach(input => input.value = "");
                 inputs[0].focus();
