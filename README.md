@@ -5,7 +5,6 @@
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>My Page</title>
-    <!-- استدعاء الخطوط -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -251,26 +250,27 @@
 
         .slider-container::-webkit-scrollbar { display: none; }
 
+        /* تعديل هائل لحجم أبعاد الصور وإظهارها كاملة دون أي قص */
         .card {
-            flex: 0 0 88%;
+            flex: 0 0 90%;
             scroll-snap-align: center;
             background: rgba(255, 255, 255, 0.3);
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 18px;
-            padding: 8px;
+            padding: 10px;
             box-sizing: border-box;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            min-height: 250px;
         }
 
-        /* تعديل ظهور الصورة بالكامل وبأبعادها المظبوطة دون قص */
         .card img {
             width: 100%;
             height: auto;
-            max-height: 480px;
+            max-height: 70vh;
             object-fit: contain;
             border-radius: 12px;
             display: block;
@@ -352,7 +352,7 @@
 
             <div class="section-title">Special Video</div>
             <div class="media-card">
-                <video id="myVideo" controls playsinline webkit-playsinline preload="auto">
+                <video id="myVideo" controls playsinline webkit-playsinline preload="metadata">
                     <source src="V1.MP4" type="video/mp4">
                     <source src="V1.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
@@ -361,8 +361,9 @@
 
             <div class="section-title">Something I only feel with you 💕</div>
             <div class="media-card">
-                <audio id="myAudio" controls preload="auto">
+                <audio id="myAudio" controls preload="metadata">
                     <source src="S1.mp3" type="audio/mpeg">
+                    <source src="S1.MP3" type="audio/mpeg">
                     متصفحك لا يدعم تشغيل الصوت.
                 </audio>
             </div>
@@ -380,7 +381,6 @@
     </div>
 
     <script>
-        // 1. القلوب المتحركة
         const heartsContainer = document.getElementById('hearts-container');
         const heartCount = 18;
 
@@ -409,7 +409,6 @@
             heartsContainer.appendChild(heart);
         }
 
-        // 2. التحكم في كلمة السر بزر Enter
         const correctPassword = "23112024"; 
         const inputs = document.querySelectorAll('.otp-input');
 
@@ -459,12 +458,6 @@
                 window.scrollTo({ top: 0, behavior: 'instant' });
                 document.documentElement.scrollTop = 0;
                 document.body.scrollTop = 0;
-
-                // إعادة تحميل الميديا لتفادي حظر سفاري للملفات
-                const video = document.getElementById('myVideo');
-                const audio = document.getElementById('myAudio');
-                if(video) video.load();
-                if(audio) audio.load();
             } else {
                 errorText.style.display = "block";
                 inputs.forEach(input => input.value = "");
