@@ -353,7 +353,7 @@
             <div class="section-title">Special Video</div>
             <div class="media-card">
                 <video id="myVideo" controls playsinline webkit-playsinline preload="none">
-                    <source src="V1.MP4" type="video/mp4">
+                    <source src="V1.mp4" type="video/mp4">
                     <source src="V1.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
@@ -363,7 +363,7 @@
             <div class="media-card">
                 <audio id="myAudio" controls preload="none">
                     <source src="S1.mp3" type="audio/mpeg">
-                    <source src="S1.MP3" type="audio/mpeg">
+                    <source src="S1 2.MP3" type="audio/mpeg">
                     متصفحك لا يدعم تشغيل الصوت.
                 </audio>
             </div>
