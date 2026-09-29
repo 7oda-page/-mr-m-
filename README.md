@@ -176,6 +176,7 @@
             border-radius: 10px;
         }
 
+        /* تأثير اللمعة الهادئة للملاحظات */
         .note {
             background: rgba(255, 255, 255, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.5);
@@ -185,9 +186,27 @@
             line-height: 1.7;
             margin: 20px auto;
             text-align: right;
-            color: #fff;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.25);
             font-weight: 500;
+            
+            /* ألوان وتأثير اللمعة المتحركة */
+            background-image: linear-gradient(
+                110deg,
+                #ffffff 0%,
+                #ffffff 35%,
+                #fff0f5 45%,
+                #ffffff 55%,
+                #ffffff 100%
+            );
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3.5s infinite linear;
+            text-shadow: 0 1px 3px rgba(219, 112, 147, 0.3);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         .section-title {
@@ -265,6 +284,16 @@
             margin-bottom: 20px;
         }
 
+        /* تنسيق خانة مشغل الصوت مع النص المطلوب */
+        .audio-subtext {
+            font-size: 14px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            font-weight: 500;
+            direction: ltr;
+        }
+
         audio {
             width: 100%;
             height: 45px;
@@ -335,6 +364,7 @@
 
             <div class="section-title">Something I only feel with you 💕</div>
             <div class="media-card">
+                <div class="audio-subtext">1:25 / 2:02 &nbsp;&nbsp;&nbsp;&nbsp; For you 💕🎶</div>
                 <audio id="myAudio" controls preload="auto">
                     <source src="S1.mp3" type="audio/mpeg">
                     <source src="S1.MP3" type="audio/mpeg">
@@ -355,7 +385,6 @@
     </div>
 
     <script>
-        // التحميل المسبق المباشر للصور
         const imageUrls = ["F1.JPG", "F5.jpg", "F6.JPG", "F2.JPG", "F4.JPG"];
         imageUrls.forEach(url => {
             const img = new Image();
