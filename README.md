@@ -250,28 +250,28 @@
 
         .slider-container::-webkit-scrollbar { display: none; }
 
-        /* تعديل هائل لحجم أبعاد الصور وإظهارها كاملة دون أي قص */
+        /* توحيد ابعاد الصور والتحكم بالارتفاع والنسبة بشكل ممتاز */
         .card {
-            flex: 0 0 90%;
+            flex: 0 0 85%;
             scroll-snap-align: center;
             background: rgba(255, 255, 255, 0.3);
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 18px;
-            padding: 10px;
+            padding: 8px;
             box-sizing: border-box;
+            height: 380px; /* ارتفاع موحد لجميع الصور */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 250px;
+            overflow: hidden;
         }
 
         .card img {
             width: 100%;
-            height: auto;
-            max-height: 70vh;
-            object-fit: contain;
+            height: 100%;
+            object-fit: cover; /* تغطية المساحة بدون تشويه الصورة */
             border-radius: 12px;
             display: block;
         }
@@ -342,17 +342,17 @@
             <div class="slider-wrapper">
                 <div class="swipe-hint"> Swipe right </div>
                 <div class="slider-container">
-                    <div class="card"><img src="F1.JPG" alt="صورة 1"></div>
-                    <div class="card"><img src="F5.jpg" alt="صورة 2"></div>
-                    <div class="card"><img src="F6.JPG" alt="صورة 3"></div>
-                    <div class="card"><img src="F2.JPG" alt="صورة 4"></div>
-                    <div class="card"><img src="F4.JPG" alt="صورة 5"></div>
+                    <div class="card"><img src="F1.JPG" alt="صورة 1" loading="lazy"></div>
+                    <div class="card"><img src="F5.jpg" alt="صورة 2" loading="lazy"></div>
+                    <div class="card"><img src="F6.JPG" alt="صورة 3" loading="lazy"></div>
+                    <div class="card"><img src="F2.JPG" alt="صورة 4" loading="lazy"></div>
+                    <div class="card"><img src="F4.JPG" alt="صورة 5" loading="lazy"></div>
                 </div>
             </div>
 
             <div class="section-title">Special Video</div>
             <div class="media-card">
-                <video id="myVideo" controls playsinline webkit-playsinline preload="metadata">
+                <video id="myVideo" controls playsinline webkit-playsinline preload="none">
                     <source src="V1.MP4" type="video/mp4">
                     <source src="V1.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
@@ -361,7 +361,7 @@
 
             <div class="section-title">Something I only feel with you 💕</div>
             <div class="media-card">
-                <audio id="myAudio" controls preload="metadata">
+                <audio id="myAudio" controls preload="none">
                     <source src="S1.mp3" type="audio/mpeg">
                     <source src="S1.MP3" type="audio/mpeg">
                     متصفحك لا يدعم تشغيل الصوت.
@@ -381,8 +381,9 @@
     </div>
 
     <script>
+        // إيقاف قلوب الأنيميشن المفرطة وتقليل عددها من 18 لـ 10 لتسريع الأداء على الأجهزة الضعيفة
         const heartsContainer = document.getElementById('hearts-container');
-        const heartCount = 18;
+        const heartCount = 10;
 
         for (let i = 0; i < heartCount; i++) {
             const heart = document.createElement('div');
