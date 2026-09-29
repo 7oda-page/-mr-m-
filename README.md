@@ -261,16 +261,19 @@
             border-radius: 18px;
             padding: 8px;
             box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* تعديل ظهور الصورة كاملة وبجودتها بدون قص */
+        /* تعديل ظهور الصورة بالكامل وبأبعادها المظبوطة دون قص */
         .card img {
             width: 100%;
-            max-height: 450px;
+            height: auto;
+            max-height: 480px;
             object-fit: contain;
             border-radius: 12px;
             display: block;
-            background: rgba(0, 0, 0, 0.15);
         }
 
         .media-card {
@@ -285,7 +288,7 @@
 
         .media-card video {
             width: 100%;
-            max-height: 350px;
+            max-height: 380px;
             border-radius: 12px;
             display: block;
             object-fit: contain;
@@ -339,17 +342,17 @@
             <div class="slider-wrapper">
                 <div class="swipe-hint"> Swipe right </div>
                 <div class="slider-container">
-                    <div class="card"><img src="F1.JPG" alt="صورة 1" loading="eager"></div>
-                    <div class="card"><img src="F5.jpg" alt="صورة 2" loading="eager"></div>
-                    <div class="card"><img src="F6.JPG" alt="صورة 3" loading="eager"></div>
-                    <div class="card"><img src="F2.JPG" alt="صورة 4" loading="eager"></div>
-                    <div class="card"><img src="F4.JPG" alt="صورة 5" loading="eager"></div>
+                    <div class="card"><img src="F1.JPG" alt="صورة 1"></div>
+                    <div class="card"><img src="F5.jpg" alt="صورة 2"></div>
+                    <div class="card"><img src="F6.JPG" alt="صورة 3"></div>
+                    <div class="card"><img src="F2.JPG" alt="صورة 4"></div>
+                    <div class="card"><img src="F4.JPG" alt="صورة 5"></div>
                 </div>
             </div>
 
             <div class="section-title">Special Video</div>
             <div class="media-card">
-                <video id="myVideo" controls playsinline webkit-playsinline preload="metadata">
+                <video id="myVideo" controls playsinline webkit-playsinline preload="auto">
                     <source src="V1.MP4" type="video/mp4">
                     <source src="V1.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
@@ -358,7 +361,7 @@
 
             <div class="section-title">Something I only feel with you 💕</div>
             <div class="media-card">
-                <audio id="myAudio" controls preload="metadata">
+                <audio id="myAudio" controls preload="auto">
                     <source src="S1.mp3" type="audio/mpeg">
                     متصفحك لا يدعم تشغيل الصوت.
                 </audio>
@@ -406,7 +409,7 @@
             heartsContainer.appendChild(heart);
         }
 
-        // 2. التحكم في إدخال كلمة السر بدون التحول التلقائي للصفحة إلا بدوسة Enter
+        // 2. التحكم في كلمة السر بزر Enter
         const correctPassword = "23112024"; 
         const inputs = document.querySelectorAll('.otp-input');
 
@@ -457,16 +460,11 @@
                 document.documentElement.scrollTop = 0;
                 document.body.scrollTop = 0;
 
+                // إعادة تحميل الميديا لتفادي حظر سفاري للملفات
                 const video = document.getElementById('myVideo');
                 const audio = document.getElementById('myAudio');
-                
-                // تجهيز الميديا للعمل على سفاري بعد الضغط على Enter مباشرةً
-                if(video) {
-                    video.load();
-                }
-                if(audio) {
-                    audio.load();
-                }
+                if(video) video.load();
+                if(audio) audio.load();
             } else {
                 errorText.style.display = "block";
                 inputs.forEach(input => input.value = "");
