@@ -58,7 +58,7 @@
             pointer-events: none;
             user-select: none;
             -webkit-user-select: none;
-            will-change: transform, opacity;
+            will-change: transform;
         }
 
         .heart svg {
@@ -67,28 +67,18 @@
             fill: none;
             stroke: rgba(255, 255, 255, 0.75);
             stroke-width: 2;
-            filter: drop-shadow(0px 0px 4px rgba(255, 105, 180, 0.4));
-            -webkit-filter: drop-shadow(0px 0px 4px rgba(255, 105, 180, 0.4));
         }
 
         @keyframes floatRandom {
             0% {
-                transform: translateY(0) translateX(0) scale(0.6) rotate(0deg);
+                transform: translateY(0) translateX(0) scale(0.6);
                 opacity: 0;
             }
-            20% {
-                opacity: 0.85;
-                transform: translateY(-25vh) translateX(var(--drift)) scale(0.85) rotate(45deg);
-            }
             50% {
-                transform: translateY(-55vh) translateX(calc(var(--drift) * -1)) scale(1) rotate(90deg);
-            }
-            80% {
-                opacity: 0.85;
-                transform: translateY(-85vh) translateX(var(--drift)) scale(0.95) rotate(135deg);
+                opacity: 0.8;
             }
             100% {
-                transform: translateY(-115vh) translateX(0) scale(1.1) rotate(180deg);
+                transform: translateY(-115vh) translateX(var(--drift)) scale(1.1);
                 opacity: 0;
             }
         }
@@ -96,10 +86,8 @@
         .container {
             width: 100%;
             max-width: 400px;
-            background: rgba(255, 255, 255, 0.22);
-            -webkit-backdrop-filter: blur(15px);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.35); /* تم إزالة backdrop-filter لسرعة الفتح والتحريك */
+            border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 30px 20px;
             border-radius: 25px;
             box-shadow: 0 8px 25px rgba(219, 112, 147, 0.2);
@@ -147,9 +135,7 @@
             font-size: 20px;
             font-weight: bold;
             border: 1.5px solid rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.4);
-            -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 10px;
             color: #333;
             transition: all 0.2s ease;
@@ -159,7 +145,7 @@
 
         .otp-input:focus {
             border-color: #ff4757;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
         }
 
@@ -191,10 +177,8 @@
         }
 
         .note {
-            background: rgba(255, 255, 255, 0.3);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 20px;
             border-radius: 18px;
             font-size: 18px;
@@ -203,7 +187,6 @@
             text-align: right;
             color: #fff;
             text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             font-weight: 500;
         }
 
@@ -246,22 +229,20 @@
             padding: 10px 5px;
             -webkit-overflow-scrolling: touch;
             direction: rtl;
+            will-change: transform;
         }
 
         .slider-container::-webkit-scrollbar { display: none; }
 
-        /* توحيد ابعاد الصور والتحكم بالارتفاع والنسبة بشكل ممتاز */
         .card {
             flex: 0 0 85%;
             scroll-snap-align: center;
-            background: rgba(255, 255, 255, 0.3);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 18px;
             padding: 8px;
             box-sizing: border-box;
-            height: 380px; /* ارتفاع موحد لجميع الصور */
+            height: 380px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -271,16 +252,14 @@
         .card img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* تغطية المساحة بدون تشويه الصورة */
+            object-fit: cover;
             border-radius: 12px;
             display: block;
         }
 
         .media-card {
-            background: rgba(255, 255, 255, 0.3);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 18px;
             padding: 12px;
             margin-bottom: 20px;
@@ -354,7 +333,7 @@
             <div class="media-card">
                 <video id="myVideo" controls playsinline webkit-playsinline preload="none">
                     <source src="V1.mp4" type="video/mp4">
-                    <source src="V1.mp4" type="video/mp4">
+                    <source src="V1.MP4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
             </div>
@@ -363,7 +342,7 @@
             <div class="media-card">
                 <audio id="myAudio" controls preload="none">
                     <source src="S1.mp3" type="audio/mpeg">
-                    <source src="S1 2.MP3" type="audio/mpeg">
+                    <source src="S1.MP3" type="audio/mpeg">
                     متصفحك لا يدعم تشغيل الصوت.
                 </audio>
             </div>
@@ -381,19 +360,18 @@
     </div>
 
     <script>
-        // إيقاف قلوب الأنيميشن المفرطة وتقليل عددها من 18 لـ 10 لتسريع الأداء على الأجهزة الضعيفة
         const heartsContainer = document.getElementById('hearts-container');
-        const heartCount = 10;
+        const heartCount = 8;
 
         for (let i = 0; i < heartCount; i++) {
             const heart = document.createElement('div');
             heart.className = 'heart';
             
-            const size = Math.floor(Math.random() * 18) + 16; 
+            const size = Math.floor(Math.random() * 16) + 14; 
             const left = Math.random() * 95; 
-            const duration = Math.random() * 6 + 8;
-            const delay = Math.random() * 7; 
-            const drift = (Math.random() - 0.5) * 80;
+            const duration = Math.random() * 5 + 7;
+            const delay = Math.random() * 5; 
+            const drift = (Math.random() - 0.5) * 60;
 
             heart.style.left = `${left}%`;
             heart.style.width = `${size}px`;
