@@ -321,17 +321,19 @@
             <div class="slider-wrapper">
                 <div class="swipe-hint"> Swipe right </div>
                 <div class="slider-container">
-                    <div class="card"><img src="F1.JPG" alt="صورة 1" loading="lazy"></div>
-                    <div class="card"><img src="F5.jpg" alt="صورة 2" loading="lazy"></div>
-                    <div class="card"><img src="F6.JPG" alt="صورة 3" loading="lazy"></div>
-                    <div class="card"><img src="F2.JPG" alt="صورة 4" loading="lazy"></div>
-                    <div class="card"><img src="F4.JPG" alt="صورة 5" loading="lazy"></div>
+                    <!-- تم إزالة loading="lazy" لفتح الصور مباشرة -->
+                    <div class="card"><img src="F1.JPG" alt="صورة 1"></div>
+                    <div class="card"><img src="F5.jpg" alt="صورة 2"></div>
+                    <div class="card"><img src="F6.JPG" alt="صورة 3"></div>
+                    <div class="card"><img src="F2.JPG" alt="صورة 4"></div>
+                    <div class="card"><img src="F4.JPG" alt="صورة 5"></div>
                 </div>
             </div>
 
             <div class="section-title">Special Video</div>
             <div class="media-card">
-                <video id="myVideo" controls playsinline webkit-playsinline preload="metadata">
+                <!-- تم ضبط التمييز التلقائي للتسريع -->
+                <video id="myVideo" controls playsinline webkit-playsinline preload="auto">
                     <source src="V1.mp4" type="video/mp4">
                     <source src="V1.MP4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
@@ -340,7 +342,7 @@
 
             <div class="section-title">Something I only feel with you 💕</div>
             <div class="media-card">
-                <audio id="myAudio" controls preload="metadata">
+                <audio id="myAudio" controls preload="auto">
                     <source src="S1.mp3" type="audio/mpeg">
                     <source src="S1.MP3" type="audio/mpeg">
                     متصفحك لا يدعم تشغيل الصوت.
@@ -360,6 +362,13 @@
     </div>
 
     <script>
+        // التحميل المسبق المباشر للصور أثناء كتابة كلمة السر
+        const imageUrls = ["F1.JPG", "F5.jpg", "F6.JPG", "F2.JPG", "F4.JPG"];
+        imageUrls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
+
         const heartsContainer = document.getElementById('hearts-container');
         const heartCount = 8;
 
@@ -433,6 +442,10 @@
             if (userEntered === correctPassword) {
                 document.getElementById("password-page").style.display = "none";
                 document.getElementById("content-page").style.display = "block";
+
+                // تجهيز الفيديو في خلفية النظام للتشغيل السريع
+                const video = document.getElementById("myVideo");
+                if(video) { video.load(); }
                 
                 window.scrollTo({ top: 0, behavior: 'instant' });
                 document.documentElement.scrollTop = 0;
