@@ -86,7 +86,7 @@
         .container {
             width: 100%;
             max-width: 400px;
-            background: rgba(255, 255, 255, 0.35); /* تم إزالة backdrop-filter لسرعة الفتح والتحريك */
+            background: rgba(255, 255, 255, 0.35);
             border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 30px 20px;
             border-radius: 25px;
@@ -331,7 +331,7 @@
 
             <div class="section-title">Special Video</div>
             <div class="media-card">
-                <video id="myVideo" controls playsinline webkit-playsinline preload="none">
+                <video id="myVideo" controls playsinline webkit-playsinline preload="metadata">
                     <source src="V1.mp4" type="video/mp4">
                     <source src="V1.MP4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
@@ -340,7 +340,7 @@
 
             <div class="section-title">Something I only feel with you 💕</div>
             <div class="media-card">
-                <audio id="myAudio" controls preload="none">
+                <audio id="myAudio" controls preload="metadata">
                     <source src="S1.mp3" type="audio/mpeg">
                     <source src="S1.MP3" type="audio/mpeg">
                     متصفحك لا يدعم تشغيل الصوت.
